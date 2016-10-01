@@ -5,11 +5,10 @@ class App extends React.Component {
 
     this.state = {
 
-      songList: this.props.data,
-      currentSong: this.props.data[1]
+      songList: exampleVideoData,
+      currentSong: exampleVideoData[0]
     };
   }
-
 
   render() {
     return (
@@ -24,12 +23,14 @@ class App extends React.Component {
       </div>
     );
   }
+  componentDidMount() {
+    this.props.searchYouTube({}, (data) => (this.setState({songList: data})));
+  }
 
-  handleTitleClick(event) {
-    console.log('event: ', event);
-    // this.setState ({
-    //   currentSong: event
-    // });
+  handleTitleClick(song) {
+    this.setState ({
+      currentSong: song
+    });
   }
 }
 
