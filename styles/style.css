@@ -37,7 +37,7 @@ body {
   box-shadow: 0 1px 0 rgba(0,0,0,0.10);
 }
 
-.video-player-details {
+.video-player-details, .videoDetail {
   background: #fff;
   padding: 8px;
   border: 0;

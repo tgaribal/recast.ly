@@ -5,8 +5,9 @@ class App extends React.Component {
 
     this.state = {
 
-      songList: exampleVideoData,
-      currentSong: exampleVideoData[0]
+      videoList: exampleVideoData,
+      currentVideo: exampleVideoData[0],
+      videoDetails: 'text'
     };
   }
 
@@ -15,22 +16,38 @@ class App extends React.Component {
       <div>
         <Nav search={this.handleInput.bind(this)}/>
         <div className="col-md-7">
-          <VideoPlayer video={this.state.currentSong}/>
+          <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.songList} update={this.handleTitleClick.bind(this)}/>
+          <VideoList videos={this.state.videoList} update={this.handleTitleClick.bind(this)}/>
+        </div>
+        <div className="col-md-7">
+          <VideoDetail detail={this.state.videoDetails}/>
         </div>
       </div>
     );
   }
+
   componentDidMount() {
-    this.props.searchYouTube({}, (data) => (this.setState({songList: data})));
+    this.props.searchYouTube({}, (data) => (
+      this.setState({
+        videoList: data,
+        currentVideo: data[0],
+        videoDetails: searchVideoDetail({id: data[0].id.videoId})
+      })
+    ));
   }
 
-  handleTitleClick(song) {
+  handleTitleClick(video) {
     this.setState ({
-      currentSong: song
+      currentVideo: video,
     });
+
+    this.props.searchVideoDetail({id: this.state.currentVideo.id.videoId}, (data) => (
+      this.setState({
+        videoDetails: data
+      })
+    ));
   }
 
   handleInput() {
@@ -39,7 +56,7 @@ class App extends React.Component {
     };
 
     setTimeout( () => { 
-      this.props.searchYouTube(searchObj, (data) => (this.setState({songList: data}))); 
+      this.props.searchYouTube(searchObj, (data) => (this.setState({videoList: data}))); 
     }, 500);
   }
 }
