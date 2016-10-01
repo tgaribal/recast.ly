@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav search={this.handleInput.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentSong}/>
         </div>
@@ -31,6 +31,16 @@ class App extends React.Component {
     this.setState ({
       currentSong: song
     });
+  }
+
+  handleInput() {
+    var searchObj = {
+      query: document.getElementsByTagName('input')[0].value
+    };
+
+    setTimeout( () => { 
+      this.props.searchYouTube(searchObj, (data) => (this.setState({songList: data}))); 
+    }, 500);
   }
 }
 
