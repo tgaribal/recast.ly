@@ -1,7 +1,7 @@
 var searchYouTube = (options, callback) => {
   // TODO
   options.key = options.key || YOUTUBE_API_KEY;
-  options.max = options.max || 10;
+  options.max = options.max || 5;
   options.query = options.query || 'cat';
 
   $.ajax({

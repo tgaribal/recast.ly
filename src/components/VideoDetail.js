@@ -1,6 +1,6 @@
 var VideoDetail = (props) => (
   <div className="videoDetail form-inline">
-    <p>{props.detail}</p>
+    <p>{props.detail.description}</p>
   </div> 
 );
 

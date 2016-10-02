@@ -23,6 +23,7 @@ class App extends React.Component {
         </div>
         <div className="col-md-7">
           <VideoDetail detail={this.state.videoDetails}/>
+          }
         </div>
       </div>
     );
@@ -33,21 +34,28 @@ class App extends React.Component {
       this.setState({
         videoList: data,
         currentVideo: data[0],
-        videoDetails: searchVideoDetail({id: data[0].id.videoId})
       })
     ));
+
+    setTimeout( () => {
+      this.props.searchVideoDetail({id: this.state.currentVideo.id.videoId}, (data) => (
+        this.setState({
+          videoDetails: data
+        })));
+    }, 50);
   }
 
   handleTitleClick(video) {
     this.setState ({
       currentVideo: video,
     });
-
-    this.props.searchVideoDetail({id: this.state.currentVideo.id.videoId}, (data) => (
-      this.setState({
-        videoDetails: data
-      })
-    ));
+    setTimeout( () => {
+      this.props.searchVideoDetail({id: this.state.currentVideo.id.videoId}, (data) => (
+        this.setState({
+          videoDetails: data
+        })
+      ));
+    }, 50);
   }
 
   handleInput() {

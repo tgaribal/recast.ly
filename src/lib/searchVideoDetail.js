@@ -12,7 +12,8 @@ var searchVideoDetail = (options, callback) => {
     url: 'https://www.googleapis.com/youtube/v3/videos?id=' + options.id,
 
     success: function(data) {
-      callback(data.items[0].snippet.description);
+      // console.log(data.items[0].snippet.description);
+      callback(data.items[0].snippet);
     }, 
     error: function(error) {
       console.error(error);
